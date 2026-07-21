@@ -1,0 +1,83 @@
+---
+title: Lumen Hero
+description: Full-bleed shader hero — a flowing iridescent light field in the pearl family, with the headline in the DOM for a11y and SEO.
+dependencies:
+  - three
+  - "@react-three/fiber"
+  - "@react-three/drei"
+---
+
+# Lumen Hero
+
+A full-bleed hero backed by a custom WebGL shader: a domain-warped simplex
+light field that drifts two brand-seeded colors over a near-white pearl base.
+The headline lives in the DOM — not the canvas — so it stays selectable,
+crawlable, and accessible. It degrades to a static CSS gradient with no WebGL,
+and to a single static frame under `prefers-reduced-motion`.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/lumen-hero.json
+```
+
+## Usage
+
+```tsx
+import { LumenHero } from "@/components/lumen-hero";
+
+export function Example() {
+  return (
+    <LumenHero
+      eyebrow="Aetheris UI"
+      title="Light that moves like water."
+      tagline="A full-bleed shader hero in the pearl family."
+      cta={{ label: "Get started", href: "/docs" }}
+    />
+  );
+}
+```
+
+The two files land next to each other in `components/` — `lumen-hero.tsx` (the
+component) and `lumen-material.ts` (the shader). Keep them colocated so the
+relative import resolves.
+
+## Props
+
+| Prop        | Type                             | Default | Description                                        |
+| ----------- | -------------------------------- | ------- | -------------------------------------------------- |
+| `title`     | `string`                         | —       | The DOM headline.                                  |
+| `tagline`   | `string`                         | —       | Supporting line under the headline.                |
+| `eyebrow`   | `string`                         | —       | Small uppercase label above the headline.          |
+| `cta`       | `{ label: string; href: string }`| —       | When set, renders a focusable call-to-action.      |
+| `children`  | `React.ReactNode`                | —       | Extra content below the tagline, in the overlay.   |
+| `className` | `string`                         | —       | Merged onto the section root (e.g. set a height).  |
+
+## Theming
+
+Uniforms are seeded from `--aui-*` tokens at mount — the browser resolves each
+token to sRGB, so any CSS color format works. Set the tokens on any ancestor to
+reskin the light field:
+
+```css
+:root {
+  --aui-accent: oklch(0.62 0.19 265);
+  --aui-accent-2: oklch(0.75 0.14 210);
+  --aui-surface: oklch(1 0 0);
+  --aui-fg: oklch(0.205 0.02 270);
+  --aui-radius: 1rem;
+}
+```
+
+## Performance & accessibility
+
+- `dpr` is capped at `[1, 2]`; the renderer runs `frameloop="demand"` (one
+  static frame, zero idle cost) whenever motion is unwelcome or the tab is
+  hidden, and only switches to a continuous loop while animating.
+- A hash-based triangular-PDF dither in the fragment shader defeats 8-bit
+  gradient banding on non-HDR displays.
+- No WebGL → a static CSS pearl gradient renders in its place; the DOM headline
+  is identical in every path.
+- `prefers-reduced-motion` renders a single static frame — no flow.
+- Headline/tagline pairings clear WCAG AA over the light field, aided by a soft
+  legibility scrim; the call-to-action keeps a visible `focus-visible` outline.

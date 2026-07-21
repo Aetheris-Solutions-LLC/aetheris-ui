@@ -1,0 +1,69 @@
+---
+title: Aura Card
+description: Cursor-aware card with a light-catching glow. Calm by default, alive on hover.
+dependencies:
+  - motion
+---
+
+# Aura Card
+
+A light-surface card whose glow and subtle tilt follow the cursor. It stays
+calm at rest and comes alive on hover, then pins itself static for anyone who
+prefers reduced motion.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/aura-card.json
+```
+
+## Usage
+
+```tsx
+import { AuraCard } from "@/components/aura-card";
+
+export function Example() {
+  return (
+    <AuraCard
+      eyebrow="Motion"
+      title="Cursor-aware glow"
+      description="A light-catching aura follows the pointer and the surface tilts toward it."
+      href="/docs/aura-card"
+      cta="Learn more"
+    />
+  );
+}
+```
+
+## Props
+
+| Prop          | Type              | Default        | Description                                                        |
+| ------------- | ----------------- | -------------- | ------------------------------------------------------------------ |
+| `title`       | `string`          | —              | Card heading.                                                      |
+| `description` | `string`          | —              | Body copy.                                                         |
+| `eyebrow`     | `string`          | —              | Small uppercase label above the title.                            |
+| `href`        | `string`          | —              | When set, renders a focusable call-to-action link.                |
+| `cta`         | `string`          | `"Learn more"` | Label for the call-to-action link.                                |
+| `children`    | `React.ReactNode` | —              | Extra content rendered below the description.                     |
+| `className`   | `string`          | —              | Merged onto the card root.                                        |
+
+## Theming
+
+Every color resolves from an `--aui-*` token with a built-in fallback, so the
+card looks right in a bare app and reskins the moment you set the tokens:
+
+```css
+:root {
+  --aui-surface: oklch(1 0 0);
+  --aui-fg: oklch(0.205 0.02 270);
+  --aui-muted: oklch(0.55 0.015 270);
+  --aui-accent: oklch(0.62 0.19 265);
+  --aui-radius: 1rem;
+}
+```
+
+## Accessibility
+
+- `prefers-reduced-motion` renders a fully static card — no tilt, no glow tracking.
+- The call-to-action link keeps a visible `focus-visible` outline.
+- Default text/surface pairings clear WCAG AA contrast.

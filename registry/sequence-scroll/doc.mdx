@@ -1,0 +1,136 @@
+---
+title: Sequence Scroll
+description: A pinned narrative section that scrubs through its steps as you scroll, then releases cleanly. GSAP ScrollTrigger under the hood.
+dependencies:
+  - gsap
+  - lenis
+---
+
+# Sequence Scroll
+
+A section that pins to the viewport and scrubs through an ordered set of
+narrative beats as the reader scrolls, with a progress rail that tracks where
+they are. Powered by GSAP `ScrollTrigger`. When the last beat lands the pin
+releases and normal scrolling resumes — and readers who prefer reduced motion
+get the same steps stacked statically, with no pinning at all.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/sequence-scroll.json
+```
+
+## Usage
+
+```tsx
+import { SequenceScroll } from "@/components/sequence-scroll";
+
+export function Example() {
+  return (
+    <SequenceScroll
+      label="How it works"
+      steps={[
+        {
+          kicker: "01 — Capture",
+          title: "It starts with a single pinned frame.",
+          body: "The section locks to the viewport and holds one idea at a time.",
+        },
+        {
+          kicker: "02 — Scrub",
+          title: "Each beat scrubs in as you move.",
+          body: "Scroll distance drives the timeline, so progress is reversible and frame-accurate.",
+        },
+        {
+          kicker: "03 — Release",
+          title: "Then it hands the page back.",
+          body: "When the last beat lands the pin releases cleanly and normal scrolling resumes.",
+        },
+      ]}
+    />
+  );
+}
+```
+
+### Smooth scrolling (Lenis) is app-level
+
+The component works with the browser's native scroll out of the box. The
+buttery scrub in the demo comes from [Lenis](https://github.com/darkroomengineering/lenis),
+which is a **page-wide concern you wire once at the app root**, not inside the
+module. The canonical GSAP + Lenis wiring:
+
+```tsx
+"use client";
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+
+export function SmoothScroll() {
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    const onTick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(onTick);
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      gsap.ticker.remove(onTick);
+      lenis.destroy();
+    };
+  }, []);
+  return null;
+}
+```
+
+Lenis also asks you to neutralize native smooth-scroll while it drives the page:
+
+```css
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+```
+
+## Props
+
+| Prop      | Type              | Default             | Description                                                        |
+| --------- | ----------------- | ------------------- | ------------------------------------------------------------------ |
+| `steps`   | `SequenceStep[]`  | —                   | Ordered beats. Each is `{ kicker, title, body }`. Needs ≥ 2 to pin. |
+| `label`   | `string`          | `"Scroll narrative"` | Accessible label applied to the pinned `<section>`.               |
+| `className` | `string`        | —                   | Merged onto the section root.                                      |
+
+`SequenceStep`:
+
+| Field    | Type     | Description                            |
+| -------- | -------- | -------------------------------------- |
+| `kicker` | `string` | Small uppercase label above the title. |
+| `title`  | `string` | Beat headline.                         |
+| `body`   | `string` | Beat body copy.                        |
+
+## Theming
+
+Every color resolves from an `--aui-*` token with a built-in fallback, so the
+section looks right in a bare app and reskins the moment you set the tokens:
+
+```css
+:root {
+  --aui-bg: oklch(0.985 0.002 90);
+  --aui-fg: oklch(0.205 0.02 270);
+  --aui-muted: oklch(0.55 0.015 270);
+  --aui-accent: oklch(0.62 0.19 265);
+  --aui-accent-strong: oklch(0.55 0.19 265);
+  --aui-border: oklch(0.92 0.004 270);
+}
+```
+
+## Accessibility
+
+- `prefers-reduced-motion: reduce` skips the pin and the scrub entirely — the
+  steps render stacked and static, fully readable, and the rail stays lit.
+- All scroll logic lives inside a `gsap.matchMedia` + `gsap.context` scope that
+  is fully reverted on unmount, so navigating away leaves **no** lingering
+  `ScrollTrigger` instances or pin-spacers.
+- Headlines and body copy are real DOM text (`<h3>` / `<p>`) for SEO and screen
+  readers; the progress rail is `aria-hidden` decoration.
+- Default text/surface pairings clear WCAG AA contrast.

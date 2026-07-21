@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "aetheris-ui",
+  "homepage": "https://ui.aetherissolutions.com",
+  "items": [
+    {
+      "name": "aura-card",
+      "type": "registry:component",
+      "title": "Aura Card",
+      "description": "Cursor-aware card with a light-catching glow. Calm by default, alive on hover.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/aura-card/aura-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sequence-scroll",
+      "type": "registry:component",
+      "title": "Sequence Scroll",
+      "description": "A pinned narrative section that scrubs through its steps as you scroll, then releases cleanly. GSAP ScrollTrigger under the hood.",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "registry/sequence-scroll/sequence-scroll.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "lumen-hero",
+      "type": "registry:component",
+      "title": "Lumen Hero",
+      "description": "Full-bleed shader hero \u2014 a flowing iridescent light field in the pearl family, with the headline in the DOM for a11y and SEO.",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "devDependencies": [
+        "@types/three"
+      ],
+      "files": [
+        {
+          "path": "registry/lumen-hero/lumen-hero.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/lumen-hero/lumen-material.ts",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
