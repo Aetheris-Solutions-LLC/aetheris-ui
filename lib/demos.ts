@@ -1,0 +1,9 @@
+import type { ComponentType } from "react";
+import dynamic from "next/dynamic";
+
+// Populated per-module: each registry module task registers its demo here.
+export const demos: Record<string, ComponentType> = {
+  "aura-card": dynamic(() => import("@/registry/aura-card/demo")),
+  "sequence-scroll": dynamic(() => import("@/registry/sequence-scroll/demo")),
+  "lumen-hero": dynamic(() => import("@/registry/lumen-hero/demo")),
+};
