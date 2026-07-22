@@ -15,7 +15,7 @@ Next.js app via `npx shadcn add <url>`. Business model = Magic UI/Aceternity
 playbook (free registry → paid tier later). Modules must be usable in Aetheris
 client sites immediately and double as social content.
 
-- **Status:** setup — spec + plan approved, build not started
+- **Status:** active — v1 BUILT + verified locally 2026-07-21 (all 8 plan tasks; Codex-reviewed); awaiting Mike's go for public repo + Vercel
 - **Active branch:** `main`
 - **Production URL:** none (target: ui.aetherissolutions.com)
 - **Repo:** local-only — public repo `Aetheris-Solutions-LLC/aetheris-ui` requires Mike's explicit go before creation/push
