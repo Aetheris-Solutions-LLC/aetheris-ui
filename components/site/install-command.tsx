@@ -21,7 +21,7 @@ export function InstallCommand({ command }: { command: string }) {
       style={{ background: "var(--aui-surface)", boxShadow: "var(--aui-elev)" }}
     >
       <code
-        className="overflow-x-auto whitespace-nowrap text-sm"
+        className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-sm"
         style={{ fontFamily: "var(--font-geist-mono)", color: "var(--aui-fg)" }}
       >
         {command}

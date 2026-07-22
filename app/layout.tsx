@@ -24,6 +24,22 @@ export const metadata: Metadata = {
   },
   description:
     "Immersive, installable UI modules for Next.js. Motion, scroll, and shader components you add in one command — light-first, brand-tokenized, built in public by Aetheris.",
+  openGraph: {
+    title: "Aetheris UI — premium modules for sites that sell",
+    description:
+      "Immersive, installable UI modules for Next.js — motion, scroll, and shader components in one command.",
+    url: "https://ui.aetherissolutions.com",
+    siteName: "Aetheris UI",
+    images: [{ url: "/og.png", width: 2400, height: 1260 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aetheris UI — premium modules for sites that sell",
+    description:
+      "Immersive, installable UI modules for Next.js — motion, scroll, and shader components in one command.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
