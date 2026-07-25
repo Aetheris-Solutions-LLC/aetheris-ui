@@ -1,8 +1,9 @@
 # aetheris-ui
 
-> **Inherits:** [`/Users/michaelrobinson/clawd/CLAUDE.md`](../../CLAUDE.md) (Mike's cross-project preferences).
-> Everything in the home-base file applies unless this file explicitly overrides it.
-> Project-level memory: [`/Users/michaelrobinson/clawd/MEMORY.md`](../../MEMORY.md) for ecosystem context.
+> **Inherits:** `~/clawd/CLAUDE.md` (Mike's cross-project preferences), when
+> checked out inside the clawd home base. Everything in that file applies
+> unless this file explicitly overrides it; `~/clawd/MEMORY.md` carries the
+> ecosystem context.
 
 ---
 
@@ -15,10 +16,10 @@ Next.js app via `npx shadcn add <url>`. Business model = Magic UI/Aceternity
 playbook (free registry → paid tier later). Modules must be usable in Aetheris
 client sites immediately and double as social content.
 
-- **Status:** active — v1 BUILT + verified locally 2026-07-21 (all 8 plan tasks; Codex-reviewed); awaiting Mike's go for public repo + Vercel
+- **Status:** active — v1 built + verified (all 8 plan tasks; Codex-reviewed), repo public 2026-07-22; Vercel deploy + domain still pending
 - **Active branch:** `main`
-- **Production URL:** none (target: ui.aetherissolutions.com)
-- **Repo:** local-only — public repo `Aetheris-Solutions-LLC/aetheris-ui` requires Mike's explicit go before creation/push
+- **Production URL:** none yet (target: ui.aetherissolutions.com — install commands and OG metadata already assume it)
+- **Repo:** [`Aetheris-Solutions-LLC/aetheris-ui`](https://github.com/Aetheris-Solutions-LLC/aetheris-ui) (public, MIT)
 
 ## Stack
 
