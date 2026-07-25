@@ -65,3 +65,21 @@ R3F: dpr capped [1,2] + no-WebGL static fallback.
 
 typecheck + lint + build + render the changed surface in a real browser +
 scratch-app `shadcn add` install for any registry module touched.
+
+**Interaction (motion) verification — read this before debugging "dead" animation.**
+A backgrounded Chrome tab reports `visibilityState: "hidden"` and Chrome then
+suspends `requestAnimationFrame`. Every animation library goes inert: Motion
+springs never tick and never bind transforms, GSAP writes only its initial
+value. Driving such a tab over CDP makes perfectly good modules look broken —
+this cost a long debugging detour on 2026-07-22. Verify motion with a browser
+where rAF actually runs:
+
+```bash
+pnpm start -p 4319                              # or dev
+BASE=http://localhost:4319 node scripts/verify-interactions.js
+```
+
+`scripts/verify-interactions.js` drives real mouse movement via Playwright
+(pointed at the system Chrome, no browser download) and asserts on measured
+transforms. Extend it whenever a new interactive module lands. Screenshots
+still verify layout fine — they just cannot verify motion.
