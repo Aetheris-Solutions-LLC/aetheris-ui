@@ -56,6 +56,36 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "polaroid-parallax",
+      "type": "registry:component",
+      "title": "Polaroid Parallax",
+      "description": "A scatter of photo prints that drift with the pointer, each at its own rate, so the frame gains depth.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/polaroid-parallax/polaroid-parallax.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-elements",
+      "type": "registry:component",
+      "title": "Magnetic Elements",
+      "description": "A wrapper that pulls opted-in children toward the pointer \u2014 the small physical tell of a considered interface.",
+      "dependencies": [
+        "gsap"
+      ],
+      "files": [
+        {
+          "path": "registry/magnetic-elements/magnetic-elements.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

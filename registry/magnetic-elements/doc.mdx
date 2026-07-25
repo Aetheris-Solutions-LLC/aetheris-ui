@@ -1,0 +1,80 @@
+---
+title: Magnetic Elements
+description: A wrapper that pulls opted-in children toward the pointer — the small physical tell of a considered interface.
+dependencies:
+  - gsap
+---
+
+# Magnetic Elements
+
+Wrap a region; anything inside marked `data-magnetic` leans toward the pointer
+as it approaches and settles back when it leaves. It is the cheapest way to make
+a nav, a CTA row, or a chip cluster feel physical.
+
+Opt-in by design: a wrapper that grabbed every button in its subtree would be a
+surprise, so targets declare themselves.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/magnetic-elements.json
+```
+
+## Usage
+
+```tsx
+import { MagneticElements } from "@/components/magnetic-elements";
+
+export function Example() {
+  return (
+    <MagneticElements radius={140} strength={14}>
+      <button data-magnetic type="button">
+        Start a project
+      </button>
+      <a data-magnetic href="/pricing">
+        Pricing
+      </a>
+      <p>This paragraph is not marked, so it never moves.</p>
+    </MagneticElements>
+  );
+}
+```
+
+## Props
+
+| Prop        | Type              | Default             | Description                                              |
+| ----------- | ----------------- | ------------------- | -------------------------------------------------------- |
+| `children`  | `React.ReactNode` | —                   | The region to watch.                                     |
+| `selector`  | `string`          | `"[data-magnetic]"` | Which descendants magnetize.                             |
+| `strength`  | `number`          | `12`                | Max px an element travels toward the pointer.            |
+| `radius`    | `number`          | `120`               | Pointer distance (px) at which the pull begins.           |
+| `className` | `string`          | —                   | Merged onto the wrapper.                                 |
+
+## Tuning
+
+- **Small `strength` wins.** 10–16px reads as physical; past ~25px it reads as
+  broken. The effect should be felt more than seen.
+- **`radius` sets the mood.** Tight (≈90px) feels precise and mechanical; wide
+  (≈180px) feels ambient and liquid.
+- Pull falls off linearly to zero at the rim, so elements never snap as the
+  pointer crosses the boundary.
+
+## Accessibility & performance
+
+- Under `prefers-reduced-motion` no listeners are attached at all — elements are
+  completely inert, not merely slower.
+- The transform is visual only: layout, hit targets, tab order, and focus rings
+  are untouched, so keyboard users get the normal interface.
+- Pointer events are coalesced into one `requestAnimationFrame` per frame and
+  driven by gsap `quickTo` setters — the documented fast path for
+  high-frequency tweens — so a dense grid of targets stays cheap.
+- Targets are re-queried on pointer entry, not every frame, so children rendered
+  later (async data, conditional UI) still magnetize without a per-frame DOM
+  query.
+- On unmount, in-flight tweens are killed and transforms reset, so a route
+  change never leaves an element parked off-center.
+
+## Theming
+
+This module sets no colors — it only moves what you give it, so your existing
+styles and `--aui-*` tokens carry through untouched.

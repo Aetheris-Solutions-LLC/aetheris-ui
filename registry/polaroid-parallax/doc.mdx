@@ -1,0 +1,105 @@
+---
+title: Polaroid Parallax
+description: A scatter of photo prints that drift with the pointer, each at its own rate, so the frame gains depth.
+dependencies:
+  - motion
+---
+
+# Polaroid Parallax
+
+A hero section with photo prints scattered around the edges. As the pointer
+moves, each print drifts at its own rate — near ones lead, far ones lag — so the
+scatter reads as depth instead of a flat sheet sliding around. Prints can bleed
+past the frame; the section clips them, which sells the illusion that the layout
+is a window onto something larger.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/polaroid-parallax.json
+```
+
+## Usage
+
+```tsx
+import { PolaroidParallax, type PolaroidItem } from "@/components/polaroid-parallax";
+
+const items: PolaroidItem[] = [
+  { src: "/photos/one.jpg", at: { top: "6%", left: "3%" }, rotate: -11, drift: 1 },
+  { src: "/photos/two.jpg", at: { bottom: "12%", left: "1%" }, rotate: -4, drift: 0.6, aspect: "square" },
+  { src: "/photos/three.jpg", at: { top: "14%", right: "-3%" }, rotate: 7, drift: 1.2 },
+];
+
+export function Example() {
+  return (
+    <PolaroidParallax items={items}>
+      <h1 className="text-5xl font-semibold tracking-tight">The prints follow you.</h1>
+    </PolaroidParallax>
+  );
+}
+```
+
+## Props
+
+| Prop        | Type               | Default                          | Description                                            |
+| ----------- | ------------------ | -------------------------------- | ------------------------------------------------------ |
+| `items`     | `PolaroidItem[]`   | —                                | The prints to scatter.                                 |
+| `strength`  | `number`           | `22`                             | Max px a print at `drift: 1` travels horizontally.     |
+| `minHeight` | `string`           | `clamp(520px, 78vh, 760px)`      | Section min-height.                                    |
+| `children`  | `React.ReactNode`  | —                                | Centered content — headline, tagline, CTA.             |
+| `className` | `string`           | —                                | Merged onto the section root.                          |
+
+### `PolaroidItem`
+
+| Field     | Type                                          | Default                     | Description                                                         |
+| --------- | --------------------------------------------- | --------------------------- | ------------------------------------------------------------------- |
+| `src`     | `string`                                      | —                           | Image URL — local, remote, or CDN.                                  |
+| `alt`     | `string`                                      | `""`                        | Leave empty for decorative prints.                                  |
+| `at`      | `{ top?, right?, bottom?, left? }`            | —                           | CSS insets. Negative values bleed past the frame.                   |
+| `rotate`  | `number`                                      | `0`                         | Resting tilt in degrees.                                            |
+| `drift`   | `number`                                      | `1`                         | Parallax multiplier. `0` pins the print; `1.4` makes it lead.       |
+| `width`   | `string`                                      | `clamp(7rem, 14vw, 15rem)`  | Any CSS width.                                                      |
+| `aspect`  | `"portrait" \| "square" \| "landscape"`       | `"portrait"`                | Photo aspect inside the print.                                      |
+| `caption` | `string`                                      | —                           | Optional line on the print's bottom lip.                            |
+
+## Composition notes
+
+- **Vary the tilt.** Matched angles read as a grid. The demo uses -11°, -4°, 7°,
+  and 16°.
+- **Vary the drift.** Uniform drift is the one thing that kills the depth
+  illusion — spread values across roughly 0.6–1.2.
+- **Let one print bleed.** A negative inset (`right: "-3%"`) clipped by the
+  section is what makes the composition feel unbounded.
+- Prints on the right half lean opposite those on the left automatically, so the
+  scatter separates instead of sliding together.
+
+## Accessibility & performance
+
+- The whole scatter is `aria-hidden` and `pointer-events-none` — decorative
+  imagery never enters the tab order or the accessibility tree. Your `children`
+  carry the real content.
+- Under `prefers-reduced-motion` the pointer handlers are never attached: prints
+  render at their resting tilt and stay there.
+- Prints are hidden below the `md` breakpoint. A scatter needs room; on a phone
+  it either crowds the headline or crops to nonsense.
+- Each photo sits on a token-tinted gradient wash, so a slow or missing image
+  still reads as an intentional print rather than a hole in the layout.
+- Uses a plain `<img>` on purpose: the module then works with any `src` in any
+  app with zero image-host configuration. Swap in `next/image` if your project
+  already has `remotePatterns` set up.
+
+## Theming
+
+Every color resolves from an `--aui-*` token with a built-in fallback:
+
+```css
+:root {
+  --aui-bg: oklch(0.985 0.002 90);
+  --aui-fg: oklch(0.205 0.02 270);
+  --aui-muted: oklch(0.55 0.015 270);
+  --aui-accent: oklch(0.62 0.19 265);
+  --aui-accent-2: oklch(0.75 0.14 210);
+  --aui-surface: oklch(1 0 0); /* the print's paper */
+  --aui-radius: 1rem;
+}
+```
