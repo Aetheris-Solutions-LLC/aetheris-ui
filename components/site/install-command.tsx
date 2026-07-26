@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 
-export function InstallCommand({ command }: { command: string }) {
+export function InstallCommand({
+  command,
+  variant = "pill",
+}: {
+  command: string;
+  /** `pill` for full-width rows, `block` for narrow columns (wraps the URL). */
+  variant?: "pill" | "block";
+}) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -15,13 +22,25 @@ export function InstallCommand({ command }: { command: string }) {
     }
   }
 
+  // "block" wraps the command over as many lines as it needs — for narrow
+  // columns, where a single-line pill would clip the URL to something useless.
+  const block = variant === "block";
+
   return (
     <div
-      className="flex items-center justify-between gap-3 rounded-full border py-2 pl-5 pr-2"
+      className={
+        block
+          ? "flex items-start justify-between gap-2 rounded-[var(--aui-radius)] border p-3 pl-4"
+          : "flex items-center justify-between gap-3 rounded-full border py-2 pl-5 pr-2"
+      }
       style={{ background: "var(--aui-surface)", boxShadow: "var(--aui-elev)" }}
     >
       <code
-        className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-sm"
+        className={
+          block
+            ? "min-w-0 flex-1 break-all text-[13px] leading-relaxed"
+            : "min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-sm"
+        }
         style={{ fontFamily: "var(--font-geist-mono)", color: "var(--aui-fg)" }}
       >
         {command}
