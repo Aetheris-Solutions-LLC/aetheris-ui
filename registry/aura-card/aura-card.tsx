@@ -30,14 +30,14 @@ export type AuraCardProps = {
  * on any ancestor to reskin.
  */
 const T = {
-  surface: "var(--aui-surface, oklch(1 0 0))",
-  fg: "var(--aui-fg, oklch(0.205 0.02 270))",
-  muted: "var(--aui-muted, oklch(0.55 0.015 270))",
-  accent: "var(--aui-accent, oklch(0.62 0.19 265))",
-  accentStrong: "var(--aui-accent-strong, oklch(0.55 0.19 265))",
-  border: "var(--aui-border, oklch(0.92 0.004 270))",
+  surface: "var(--aui-surface, #ffffff)",
+  fg: "var(--aui-fg, #1c1917)",
+  muted: "var(--aui-muted, #78716c)",
+  accent: "var(--aui-accent, #dc143c)",
+  accentStrong: "var(--aui-accent-strong, #b01030)",
+  border: "var(--aui-border, #e7e5e4)",
   elev:
-    "var(--aui-elev, 0 1px 2px oklch(0.21 0.02 270 / 0.05), 0 18px 44px oklch(0.21 0.02 270 / 0.07))",
+    "var(--aui-elev, 0 1px 2px rgb(28 25 23 / 0.05), 0 18px 44px rgb(28 25 23 / 0.07))",
 } as const;
 
 const TILT_DEG = 4;

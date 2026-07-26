@@ -3,11 +3,11 @@
 import { MagneticElements } from "./magnetic-elements";
 
 const T = {
-  fg: "var(--aui-fg, oklch(0.205 0.02 270))",
-  muted: "var(--aui-muted, oklch(0.55 0.015 270))",
-  accent: "var(--aui-accent, oklch(0.62 0.19 265))",
-  surface: "var(--aui-surface, oklch(1 0 0))",
-  border: "var(--aui-border, oklch(0.92 0.004 270))",
+  fg: "var(--aui-fg, #1c1917)",
+  muted: "var(--aui-muted, #78716c)",
+  accent: "var(--aui-accent, #dc143c)",
+  surface: "var(--aui-surface, #ffffff)",
+  border: "var(--aui-border, #e7e5e4)",
 };
 
 const chips = ["Pricing", "Case studies", "Careers", "Changelog", "Contact"];

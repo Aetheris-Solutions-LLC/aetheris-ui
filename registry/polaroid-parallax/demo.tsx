@@ -44,7 +44,7 @@ export default function PolaroidParallaxDemo() {
     <PolaroidParallax items={items} className="w-full">
       <p
         className="text-[11px] font-medium uppercase tracking-[0.14em]"
-        style={{ color: "var(--aui-muted, oklch(0.55 0.015 270))" }}
+        style={{ color: "var(--aui-muted, #78716c)" }}
       >
         Move your cursor
       </p>
@@ -53,7 +53,7 @@ export default function PolaroidParallaxDemo() {
       </h2>
       <p
         className="mx-auto mt-4 max-w-md text-sm leading-relaxed"
-        style={{ color: "var(--aui-muted, oklch(0.55 0.015 270))" }}
+        style={{ color: "var(--aui-muted, #78716c)" }}
       >
         Each print drifts at its own rate, so the scatter gains depth instead of
         sliding as one flat sheet.

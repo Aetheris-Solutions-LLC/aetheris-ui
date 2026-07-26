@@ -7,16 +7,30 @@ export function ModuleCard({ item }: { item: RegistryItem }) {
   return (
     <Link
       href={`/docs/${item.name}`}
-      className="group relative flex flex-col overflow-hidden rounded-[var(--aui-radius)] border p-6 transition-transform duration-300 hover:-translate-y-1"
-      style={{ background: "var(--aui-surface)", boxShadow: "var(--aui-elev)" }}
+      className="group relative flex flex-col overflow-hidden rounded-[var(--aui-radius)] border p-6 transition-[transform,box-shadow,border-color] duration-500 hover:-translate-y-1 hover:border-[var(--aui-accent-line)] hover:shadow-[var(--aui-accent-glow)]"
+      style={{
+        background: "var(--aui-surface)",
+        boxShadow: "var(--aui-elev)",
+        transitionTimingFunction: "var(--aui-ease)",
+      }}
     >
       {/* accent hairline that lights up on hover */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
             "linear-gradient(90deg, transparent, var(--aui-accent), transparent)",
+        }}
+      />
+
+      {/* a whisper of brand warmth pooling in the corner on hover */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(circle, var(--aui-accent-tint), transparent 70%)",
         }}
       />
 

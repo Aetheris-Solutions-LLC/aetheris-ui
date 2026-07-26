@@ -13,6 +13,16 @@ export function SiteHeader() {
       className="sticky top-0 z-50 border-b backdrop-blur-xl"
       style={{ background: "color-mix(in oklab, var(--aui-bg) 80%, transparent)" }}
     >
+      {/* brand hairline along the very top edge of the page */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, var(--aui-accent), transparent)",
+          opacity: 0.5,
+        }}
+      />
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"

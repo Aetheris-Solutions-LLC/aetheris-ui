@@ -25,12 +25,12 @@ export type SequenceScrollProps = {
  * on any ancestor to reskin.
  */
 const T = {
-  bg: "var(--aui-bg, oklch(0.985 0.002 90))",
-  fg: "var(--aui-fg, oklch(0.205 0.02 270))",
-  muted: "var(--aui-muted, oklch(0.55 0.015 270))",
-  accent: "var(--aui-accent, oklch(0.62 0.19 265))",
-  accentStrong: "var(--aui-accent-strong, oklch(0.55 0.19 265))",
-  border: "var(--aui-border, oklch(0.92 0.004 270))",
+  bg: "var(--aui-bg, #fafaf9)",
+  fg: "var(--aui-fg, #1c1917)",
+  muted: "var(--aui-muted, #78716c)",
+  accent: "var(--aui-accent, #dc143c)",
+  accentStrong: "var(--aui-accent-strong, #b01030)",
+  border: "var(--aui-border, #e7e5e4)",
 } as const;
 
 // useLayoutEffect on the client, useEffect on the server — avoids the SSR

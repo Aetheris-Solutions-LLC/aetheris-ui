@@ -1,19 +1,29 @@
 @import "tailwindcss";
 
+/* Aetheris brand: crimson on warm stone. Mirrors the token system in the
+   Aetheris site (--agency-red #DC143C, stone neutrals) so a module dropped into
+   a client build already looks like our work. */
 :root {
-  --aui-bg: oklch(0.985 0.002 90);
-  --aui-fg: oklch(0.205 0.02 270);
-  --aui-muted: oklch(0.55 0.015 270);
-  --aui-accent: oklch(0.62 0.19 265);   /* electric indigo — placeholder brand */
-  --aui-accent-2: oklch(0.75 0.14 210); /* sky — secondary */
-  --aui-surface: oklch(1 0 0);
+  --aui-bg: #fafaf9; /* warm off-white, not blue-white */
+  --aui-fg: #1c1917; /* charcoal */
+  --aui-muted: #78716c; /* stone-500 — 4.9:1 on --aui-bg */
+  --aui-accent: #dc143c; /* crimson — CTAs, fills, decorative */
+  --aui-accent-2: #ff0040; /* glow red — the top end of gradients */
+  --aui-surface: #ffffff;
   --aui-radius: 1rem;
 
   /* Shell-derived helpers (all --aui-*, base tokens above are untouched) */
-  --aui-accent-strong: oklch(0.55 0.19 265); /* AA-contrast accent for text/icons on light surfaces */
-  --aui-border: oklch(0.92 0.004 270);
-  --aui-hover: color-mix(in oklab, var(--aui-fg) 5%, transparent);
-  --aui-elev: 0 1px 2px oklch(0.21 0.02 270 / 0.05), 0 18px 44px oklch(0.21 0.02 270 / 0.07);
+  --aui-accent-strong: #b01030; /* 7:1 on white — accent for text and icons */
+  --aui-border: #e7e5e4; /* stone-200 */
+  --aui-hover: color-mix(in oklab, var(--aui-fg) 4%, transparent);
+  --aui-elev: 0 1px 2px rgb(28 25 23 / 0.05), 0 18px 44px rgb(28 25 23 / 0.07);
+  /* Accent hierarchy, used with discipline: line → tint → glow. */
+  --aui-accent-line: color-mix(in oklab, var(--aui-accent) 28%, transparent);
+  --aui-accent-tint: color-mix(in oklab, var(--aui-accent) 7%, transparent);
+  --aui-accent-glow: 0 18px 50px -22px rgb(220 20 60 / 0.4);
+  --aui-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Fine fractal grain — the single cheapest "printed, not rendered" cue. */
+  --aui-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
 }
 
 @theme inline {
@@ -46,6 +56,7 @@
   }
 
   body {
+    position: relative;
     background: var(--aui-bg);
     color: var(--aui-fg);
     font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -53,8 +64,36 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Grain sits above the background and below everything else, fixed so it
+     never scrolls with content — a texture, not a pattern. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--aui-grain);
+    pointer-events: none;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+
   ::selection {
-    background: color-mix(in oklab, var(--aui-accent) 22%, transparent);
+    background: color-mix(in oklab, var(--aui-accent) 20%, transparent);
+    color: var(--aui-fg);
+  }
+
+  /* Display type: tight tracking is what separates a premium headline from a
+     default one. Matches the Aetheris site's display scale. */
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
   }
 
   :focus-visible {

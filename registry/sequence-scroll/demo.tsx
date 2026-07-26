@@ -68,7 +68,7 @@ export default function SequenceScrollDemo() {
       <section className="mx-auto flex min-h-[45vh] max-w-3xl flex-col justify-center px-6 py-20 text-center">
         <p
           className="text-xs font-semibold uppercase tracking-[0.16em]"
-          style={{ color: "var(--aui-accent-strong, oklch(0.55 0.19 265))" }}
+          style={{ color: "var(--aui-accent-strong, #b01030)" }}
         >
           Keep scrolling
         </p>
@@ -77,7 +77,7 @@ export default function SequenceScrollDemo() {
         </h2>
         <p
           className="mx-auto mt-4 max-w-xl text-base leading-relaxed"
-          style={{ color: "var(--aui-muted, oklch(0.55 0.015 270))" }}
+          style={{ color: "var(--aui-muted, #78716c)" }}
         >
           Scroll down — the panel below will lock to the screen and scrub through
           its beats before releasing you.
@@ -92,7 +92,7 @@ export default function SequenceScrollDemo() {
         </h2>
         <p
           className="mx-auto mt-4 max-w-xl text-base leading-relaxed"
-          style={{ color: "var(--aui-muted, oklch(0.55 0.015 270))" }}
+          style={{ color: "var(--aui-muted, #78716c)" }}
         >
           The pin released the moment the last beat finished. No trapped scroll,
           no leftover listeners.

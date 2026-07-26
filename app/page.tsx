@@ -19,19 +19,27 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(58% 60% at 50% -8%, color-mix(in oklab, var(--aui-accent) 13%, transparent), transparent 68%)",
+              "radial-gradient(48% 52% at 22% -10%, color-mix(in oklab, var(--aui-accent) 14%, transparent), transparent 66%)," +
+              "radial-gradient(42% 48% at 86% 4%, color-mix(in oklab, var(--aui-accent-2) 10%, transparent), transparent 62%)",
           }}
         />
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 pt-24 pb-20 md:pt-32 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
           <div>
             <span
               className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium"
-              style={{ color: "var(--aui-muted)" }}
+              style={{
+                color: "var(--aui-muted)",
+                borderColor: "var(--aui-accent-line)",
+                background: "var(--aui-accent-tint)",
+              }}
             >
               <span
                 aria-hidden
                 className="h-1.5 w-1.5 rounded-full"
-                style={{ background: "var(--aui-accent)" }}
+                style={{
+                  background: "var(--aui-accent)",
+                  boxShadow: "0 0 0 3px var(--aui-accent-tint)",
+                }}
               />
               Aetheris UI · component registry
             </span>
@@ -56,8 +64,11 @@ export default function Home() {
                 <Link
                   data-magnetic
                   href="#modules"
-                  className="inline-flex h-11 items-center rounded-full px-6 text-sm font-semibold transition-opacity hover:opacity-90"
-                  style={{ background: "var(--aui-fg)", color: "var(--aui-bg)" }}
+                  className="inline-flex h-11 items-center rounded-full px-6 text-sm font-semibold text-white transition-shadow duration-500 hover:shadow-[var(--aui-accent-glow)]"
+                  style={{
+                    background: "var(--aui-accent)",
+                    transitionTimingFunction: "var(--aui-ease)",
+                  }}
                 >
                   Browse modules
                 </Link>

@@ -39,28 +39,28 @@ export type LumenHeroProps = {
  * on any ancestor to reskin the light field.
  */
 const T = {
-  fg: "var(--aui-fg, oklch(0.205 0.02 270))",
-  muted: "var(--aui-muted, oklch(0.55 0.015 270))",
-  accent: "var(--aui-accent, oklch(0.62 0.19 265))",
-  accentStrong: "var(--aui-accent-strong, oklch(0.55 0.19 265))",
+  fg: "var(--aui-fg, #1c1917)",
+  muted: "var(--aui-muted, #78716c)",
+  accent: "var(--aui-accent, #dc143c)",
+  accentStrong: "var(--aui-accent-strong, #b01030)",
 } as const;
 
 /** CSS-only pearl gradient — the no-WebGL fallback, always painted underneath. */
 const FALLBACK_GRADIENT =
-  "radial-gradient(120% 120% at 18% 12%, color-mix(in oklab, var(--aui-accent, oklch(0.62 0.19 265)) 16%, white) 0%, transparent 46%)," +
-  "radial-gradient(120% 120% at 84% 22%, color-mix(in oklab, var(--aui-accent-2, var(--aui-accent, oklch(0.75 0.14 210))) 20%, white) 0%, transparent 52%)," +
-  "linear-gradient(160deg, white 0%, color-mix(in oklab, var(--aui-accent, oklch(0.62 0.19 265)) 6%, white) 100%)";
+  "radial-gradient(120% 120% at 18% 12%, color-mix(in oklab, var(--aui-accent, #dc143c) 16%, white) 0%, transparent 46%)," +
+  "radial-gradient(120% 120% at 84% 22%, color-mix(in oklab, var(--aui-accent-2, var(--aui-accent, #ff0040)) 20%, white) 0%, transparent 52%)," +
+  "linear-gradient(160deg, white 0%, color-mix(in oklab, var(--aui-accent, #dc143c) 6%, white) 100%)";
 
 /** Near-white pearl clear color for the renderer (kept hex-free / brand-token-free). */
-const CLEAR_COLOR = new Color(0.975, 0.978, 0.99);
+const CLEAR_COLOR = new Color(0.98, 0.978, 0.976);
 
 type RGB = readonly [number, number, number];
 type Colors = { a: RGB; b: RGB; c: RGB };
 
 const DEFAULT_COLORS: Colors = {
-  a: [0.39, 0.4, 0.95],
-  b: [0.42, 0.72, 0.93],
-  c: [0.97, 0.91, 0.96],
+  a: [0.863, 0.078, 0.235], // #dc143c crimson
+  b: [1.0, 0.0, 0.251], // #ff0040 glow red
+  c: [0.99, 0.975, 0.972], // warm near-white
 };
 
 function cx(...parts: Array<string | false | undefined>): string {

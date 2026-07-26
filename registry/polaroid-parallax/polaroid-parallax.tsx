@@ -43,12 +43,12 @@ export type PolaroidParallaxProps = {
  * Aetheris defaults, so the section renders premium in a bare app.
  */
 const T = {
-  bg: "var(--aui-bg, oklch(0.985 0.002 90))",
-  fg: "var(--aui-fg, oklch(0.205 0.02 270))",
-  muted: "var(--aui-muted, oklch(0.55 0.015 270))",
-  accent: "var(--aui-accent, oklch(0.62 0.19 265))",
-  accent2: "var(--aui-accent-2, oklch(0.75 0.14 210))",
-  paper: "var(--aui-surface, oklch(1 0 0))",
+  bg: "var(--aui-bg, #fafaf9)",
+  fg: "var(--aui-fg, #1c1917)",
+  muted: "var(--aui-muted, #78716c)",
+  accent: "var(--aui-accent, #dc143c)",
+  accent2: "var(--aui-accent-2, #ff0040)",
+  paper: "var(--aui-surface, #ffffff)",
 } as const;
 
 /** Hoisted so the spring keeps a stable config identity across renders. */
@@ -168,7 +168,7 @@ function Print({
           background: T.paper,
           borderColor: `color-mix(in oklab, ${T.fg} 10%, transparent)`,
           boxShadow:
-            "0 30px 60px -22px oklch(0.21 0.02 270 / 0.35), 0 8px 18px -10px oklch(0.21 0.02 270 / 0.25)",
+            "0 30px 60px -22px rgb(28 25 23 / 0.35), 0 8px 18px -10px rgb(28 25 23 / 0.25)",
         }}
       >
         <div
