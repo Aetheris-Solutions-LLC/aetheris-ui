@@ -9,10 +9,17 @@ export function SiteFooter() {
         <div className="flex items-center gap-2.5">
           <span
             aria-hidden
-            className="h-[18px] w-[18px] rounded-[6px]"
+            className="h-[22px] w-[22px] shrink-0"
             style={{
-              background:
-                "linear-gradient(140deg, var(--aui-accent), var(--aui-accent-2))",
+              backgroundColor: "var(--aui-accent)",
+              maskImage: "url(/aetheris-mark.svg)",
+              WebkitMaskImage: "url(/aetheris-mark.svg)",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
             }}
           />
           <span className="text-sm" style={{ color: "var(--aui-muted)" }}>

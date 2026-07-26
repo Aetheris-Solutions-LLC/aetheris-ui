@@ -29,12 +29,22 @@ export function SiteHeader() {
           className="group flex items-center gap-2.5 rounded-md"
           aria-label="Aetheris UI home"
         >
+          {/* The Aetheris mark, masked so it always paints in the live accent
+              token rather than carrying its own baked-in fill. */}
           <span
             aria-hidden
-            className="h-[18px] w-[18px] rounded-[6px] shadow-sm transition-transform duration-300 group-hover:scale-110"
+            className="h-[26px] w-[26px] shrink-0 transition-transform duration-700 group-hover:rotate-[30deg]"
             style={{
-              background:
-                "linear-gradient(140deg, var(--aui-accent), var(--aui-accent-2))",
+              backgroundColor: "var(--aui-accent)",
+              maskImage: "url(/aetheris-mark.svg)",
+              WebkitMaskImage: "url(/aetheris-mark.svg)",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              transitionTimingFunction: "var(--aui-ease)",
             }}
           />
           <span className="text-[15px] font-semibold tracking-tight">

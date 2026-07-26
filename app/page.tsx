@@ -44,7 +44,7 @@ export default function Home() {
               Aetheris UI · component registry
             </span>
 
-            <h1 className="mt-6 text-5xl font-semibold leading-[1.03] tracking-tight md:text-7xl">
+            <h1 className="aui-display mt-6 text-[3.4rem] leading-[0.95] md:text-[5.5rem]">
               Premium modules for sites that sell.
             </h1>
 
@@ -112,7 +112,7 @@ export default function Home() {
       {/* Gallery */}
       <section id="modules" className="mx-auto max-w-6xl px-6 pb-28">
         <div className="flex items-end justify-between border-b pb-5">
-          <h2 className="text-2xl font-semibold tracking-tight">Modules</h2>
+          <h2 className="aui-display text-[1.7rem]">Modules</h2>
           <span className="text-sm" style={{ color: "var(--aui-muted)" }}>
             {items.length} available
           </span>
@@ -157,7 +157,7 @@ function EmptyState() {
           <path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
         </svg>
       </div>
-      <h3 className="mt-5 text-lg font-semibold tracking-tight">
+      <h3 className="aui-display mt-5 text-[1.35rem]">
         The catalog is being built
       </h3>
       <p

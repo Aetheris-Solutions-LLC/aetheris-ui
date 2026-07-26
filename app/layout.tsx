@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Anton, Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 
-const inter = Inter({
-  variable: "--font-inter",
+// The Aetheris brand faces: Anton for display, Archivo for body/UI, JetBrains
+// Mono for technical labels — the same stack the Aetheris site loads.
+const display = Anton({
+  weight: "400",
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const body = Archivo({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
@@ -50,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <SiteHeader />

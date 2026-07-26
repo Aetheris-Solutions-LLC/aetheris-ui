@@ -66,7 +66,7 @@ export default async function DocsPage({ params }: PageProps) {
           All modules
         </Link>
 
-        <h1 className="mt-5 text-4xl font-semibold tracking-tight">{item.title}</h1>
+        <h1 className="aui-display mt-5 text-[2.75rem]">{item.title}</h1>
 
         {doc.lead ? (
           <div

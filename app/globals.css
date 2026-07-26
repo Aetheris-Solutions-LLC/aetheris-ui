@@ -33,7 +33,8 @@
   --color-accent: var(--aui-accent);
   --color-surface: var(--aui-surface);
   --color-border: var(--aui-border);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
   --font-mono: var(--font-mono-brand);
 }
 
@@ -59,7 +60,7 @@
     position: relative;
     background: var(--aui-bg);
     color: var(--aui-fg);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -83,12 +84,6 @@
   ::selection {
     background: color-mix(in oklab, var(--aui-accent) 20%, transparent);
     color: var(--aui-fg);
-  }
-
-  /* Display type: tight tracking is what separates a premium headline from a
-     default one. Matches the Aetheris site's display scale. */
-  h1 {
-    letter-spacing: -0.035em;
   }
 
   h2,
@@ -230,4 +225,16 @@
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--aui-muted);
+}
+
+/* Display voice — Anton, the Aetheris display face. Single weight by design, so
+   never pair it with a font-weight utility (the browser would synthesise a fake
+   bold and smear the condensed forms). */
+.aui-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  /* Anton's caps are tall and its descenders shallow; below ~1.0 the lines of a
+     two-line headline start to collide. */
+  line-height: 1.02;
+  letter-spacing: -0.012em;
 }

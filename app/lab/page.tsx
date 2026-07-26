@@ -40,7 +40,7 @@ export default function LabIndex() {
           The lab
         </span>
 
-        <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-5xl">
+        <h1 className="aui-display mt-6 text-[2.75rem] md:text-[3.5rem]">
           Rough edges on purpose.
         </h1>
 
@@ -64,7 +64,7 @@ export default function LabIndex() {
 
       <section className="mt-14">
         <div className="flex items-end justify-between border-b pb-5">
-          <h2 className="text-2xl font-semibold tracking-tight">Experiments</h2>
+          <h2 className="aui-display text-[1.7rem]">Experiments</h2>
           <span className="text-sm" style={{ color: "var(--aui-muted)" }}>
             {experiments.length} in the open
           </span>
