@@ -104,7 +104,7 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
           style={{ background: "var(--aui-accent)" }}
         />
         <span
-          className="text-[11px] font-medium uppercase tracking-[0.14em]"
+          className="aui-kicker"
           style={{ color: "var(--aui-muted)" }}
         >
           {experiment.tag} · experiment

@@ -41,7 +41,7 @@ export function InstallCommand({
             ? "min-w-0 flex-1 break-all text-[13px] leading-relaxed"
             : "min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-sm"
         }
-        style={{ fontFamily: "var(--font-geist-mono)", color: "var(--aui-fg)" }}
+        style={{ fontFamily: "var(--font-mono-brand)", color: "var(--aui-fg)" }}
       >
         {command}
       </code>

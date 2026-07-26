@@ -41,7 +41,7 @@ export function ModuleCard({ item }: { item: RegistryItem }) {
           style={{ background: "var(--aui-accent)" }}
         />
         <span
-          className="text-[11px] font-medium uppercase tracking-[0.14em]"
+          className="aui-kicker"
           style={{ color: "var(--aui-muted)" }}
         >
           {kicker}

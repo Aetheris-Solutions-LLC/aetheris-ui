@@ -88,7 +88,7 @@ export default async function DocsPage({ params }: PageProps) {
                 style={{
                   background: "var(--aui-surface)",
                   color: "var(--aui-muted)",
-                  fontFamily: "var(--font-geist-mono)",
+                  fontFamily: "var(--font-mono-brand)",
                 }}
               >
                 {dep}
@@ -115,7 +115,7 @@ export default async function DocsPage({ params }: PageProps) {
 
       {/* Install */}
       <section className="mt-8 max-w-2xl">
-        <h2 className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--aui-muted)" }}>
+        <h2 className="aui-kicker" style={{ color: "var(--aui-muted)" }}>
           Install
         </h2>
         <div className="mt-3">
@@ -160,7 +160,7 @@ function AdjacentLink({
       style={{ background: "var(--aui-surface)" }}
     >
       <span
-        className={`text-[11px] font-medium uppercase tracking-[0.14em] ${isNext ? "sm:text-right" : ""}`}
+        className={`aui-kicker ${isNext ? "sm:text-right" : ""}`}
         style={{ color: "var(--aui-muted)" }}
       >
         {isNext ? "Next" : "Previous"}

@@ -89,7 +89,7 @@ export default function Home() {
               style={{ background: "var(--aui-surface)", boxShadow: "var(--aui-elev)" }}
             >
               <h2
-                className="text-[11px] font-medium uppercase tracking-[0.14em]"
+                className="aui-kicker"
                 style={{ color: "var(--aui-muted)" }}
               >
                 Quick start
