@@ -1,0 +1,92 @@
+---
+title: Tally Tiles
+description: A row of figures that count up as they scroll into view, with the number carrying all the weight.
+dependencies:
+  - motion
+---
+
+# Tally Tiles
+
+Stat rows go wrong when everything competes. Here the figure is oversized, tight
+and gradient-filled while the label, hint and dot stay quiet — so the row reads
+as a statement rather than a dashboard. Each number counts up once, when it
+arrives.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/tally-tiles.json
+```
+
+## Usage
+
+```tsx
+import { TallyTiles } from "@/components/tally-tiles";
+
+export function Example() {
+  return (
+    <TallyTiles
+      tiles={[
+        { label: "clubs served", value: 128, featured: true, hint: "across 14 states" },
+        { label: "uptime", value: 99.98, unit: "%" },
+        { label: "median response", value: 240, unit: "ms" },
+        { label: "open incidents", value: 0, live: true },
+      ]}
+    />
+  );
+}
+```
+
+## Props
+
+| Prop        | Type      | Default | Description                                        |
+| ----------- | --------- | ------- | -------------------------------------------------- |
+| `tiles`     | `Tally[]` | —       | The figures to show.                               |
+| `duration`  | `number`  | `1.4`   | Seconds the count-up takes once in view.           |
+| `className` | `string`  | —       | Merged onto the grid.                              |
+
+### `Tally`
+
+| Field       | Type      | Default        | Description                                                  |
+| ----------- | --------- | -------------- | ------------------------------------------------------------ |
+| `label`     | `string`  | —              | The mono kicker above the figure. Also the React key.        |
+| `value`     | `number`  | —              | The final number.                                            |
+| `unit`      | `string`  | —              | Rendered tight against the number — `%`, `k`, `+`, `ms`.     |
+| `hint`      | `string`  | —              | Small line underneath.                                       |
+| `live`      | `boolean` | `false`        | Adds a pulsing dot: this number still moves in the real world. |
+| `featured`  | `boolean` | `false`        | Accent plate and hairline. Use it on the number that matters. |
+| `precision` | `number`  | value's own    | Decimal places.                                               |
+
+## Composition notes
+
+- **Four tiles is the sweet spot** at desktop width; the grid drops to two up at
+  `sm` and one on phones.
+- **Feature exactly one tile.** Two accent plates in a row of four cancel each
+  other out.
+- **`live` is a promise.** Use it only where the figure genuinely moves — an
+  incident count, votes cast, seats left.
+
+## Accessibility & performance
+
+- Renders as a `<dl>` with each label/figure pair as `<dt>`/`<dd>`, so the row is
+  a described list to a screen reader rather than loose numbers.
+- The pre-animation text is the **final value**, so a crawler, a print, or a
+  reader with JS disabled sees the real figure — the count-up is an enhancement
+  on top of correct content.
+- Under `prefers-reduced-motion` values render immediately and the live dot holds
+  steady instead of pulsing.
+- The count writes directly to the text node — one mutation per frame, no React
+  render inside the animation loop.
+
+## Theming
+
+```css
+:root {
+  --aui-fg: #1c1917;
+  --aui-muted: #78716c;
+  --aui-accent: #dc143c; /* live dot, featured plate */
+  --aui-accent-strong: #b01030; /* the numeral gradient's far end */
+  --aui-surface: #ffffff;
+  --aui-border: #e7e5e4;
+}
+```

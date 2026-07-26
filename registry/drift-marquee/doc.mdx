@@ -1,0 +1,95 @@
+---
+title: Drift Marquee
+description: Rows of tiles drifting in opposite directions — the river pattern, with no animation library.
+dependencies: []
+---
+
+# Drift Marquee
+
+Two rows of tiles moving against each other, edges dissolving into the page. The
+pattern sells a catalog — product, press, portfolio — without asking anyone to
+click. The drift is a CSS keyframe on a duplicated track, so it runs on the
+compositor and needs **no animation library at all**.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/drift-marquee.json
+```
+
+## Usage
+
+```tsx
+import { DriftMarquee, type MarqueeItem } from "@/components/drift-marquee";
+
+const items: MarqueeItem[] = [
+  { id: "1", image: "/shop/tee.jpg", title: "Home Tee", meta: "$38", href: "/shop/home-tee" },
+  { id: "2", image: "/shop/scarf.jpg", title: "Match Scarf", meta: "$24", href: "/shop/scarf" },
+];
+
+export function Example() {
+  return <DriftMarquee items={items} rows={2} duration={38} />;
+}
+```
+
+## Props
+
+| Prop        | Type                                      | Default      | Description                                                     |
+| ----------- | ----------------------------------------- | ------------ | --------------------------------------------------------------- |
+| `items`     | `MarqueeItem[]`                           | —            | Tiles, dealt round-robin across the rows.                       |
+| `rows`      | `number`                                  | `2`          | Row 2 drifts the other way, row 3 with row 1, and so on.        |
+| `duration`  | `number`                                  | `42`         | Seconds for one full pass. Higher is slower.                    |
+| `aspect`    | `"portrait" \| "square" \| "landscape"`   | `"portrait"` | Tile aspect.                                                    |
+| `velocity`  | `boolean`                                 | `false`      | Couple drift speed to scroll velocity. See the warning below.   |
+| `className` | `string`                                  | —            | Merged onto the root.                                           |
+
+### `MarqueeItem`
+
+| Field   | Type     | Description                                                |
+| ------- | -------- | ---------------------------------------------------------- |
+| `id`    | `string` | Stable key.                                                |
+| `image` | `string` | Optional. Without it the tile is a type-only card.          |
+| `title` | `string` | Shown in the hover pill.                                    |
+| `meta`  | `string` | Second line in the pill — a price, a date, a category.      |
+| `href`  | `string` | Makes the tile a link.                                      |
+
+## Composition notes
+
+- **Six to ten items per row.** Fewer and the loop is obvious; many more and you
+  are shipping images nobody scrolls far enough to see.
+- **Bleed it past the container** (`className="-mx-10"` or a full-bleed wrapper).
+  A marquee inset with visible margins looks like a bug.
+- **`velocity` is off by default and should usually stay off.** Speed that reacts
+  to scrolling is a strong effect that reads as gimmick more often than as
+  craft — it is here for the one layout where it earns its place, not as the
+  default personality.
+
+## Accessibility & performance
+
+- Zero dependencies. The drift is one CSS keyframe translating a track by exactly
+  `-50%`, which lands the duplicate where the original started — a seamless loop
+  with no JS in the animation path.
+- The track holds each row twice. The second copy is `aria-hidden` with
+  `tabIndex={-1}`, so screen readers and keyboard users meet each tile once.
+- Under `prefers-reduced-motion` the animation is disabled outright and the rows
+  sit still as ordinary strips.
+- Hover pills are always visible where hover does not exist
+  (`@media (hover: hover)`), so touch users are not left guessing at titles.
+- Images are lazy and decorative (`alt=""`) — the title text carries the meaning.
+
+## Theming
+
+```css
+:root {
+  --aui-bg: #fafaf9; /* the edge masks fade to this — match your section */
+  --aui-fg: #1c1917;
+  --aui-muted: #78716c;
+  --aui-accent: #dc143c;
+  --aui-accent-2: #ff0040;
+  --aui-surface: #ffffff;
+  --aui-border: #e7e5e4;
+}
+```
+
+The edge masks fade to `--aui-bg`. On a section with a different background, set
+the token on a wrapper so the fade matches.

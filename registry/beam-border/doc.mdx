@@ -1,0 +1,84 @@
+---
+title: Beam Border
+description: A lit segment travelling around the border of whatever you wrap — no library, no JavaScript in the loop.
+dependencies: []
+---
+
+# Beam Border
+
+A comet of brand colour running the perimeter of a button or card. A conic
+gradient rotates behind the content and the padding box masks it to a ring, so
+there is **no animation library and no JavaScript in the loop** — the browser
+composites it and the CPU stays idle.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/beam-border.json
+```
+
+## Usage
+
+```tsx
+import { BeamBorder } from "@/components/beam-border";
+
+export function Example() {
+  return (
+    <>
+      <BeamBorder width={2} radius="9999px">
+        <button className="rounded-full px-7 py-3 font-semibold">Ship it</button>
+      </BeamBorder>
+
+      <BeamBorder duration={9} spread={0.3} onHoverOnly>
+        <article className="p-5">Quiet until you want it.</article>
+      </BeamBorder>
+    </>
+  );
+}
+```
+
+The wrapped child should paint its own background — the beam lives in the
+padding ring behind it.
+
+## Props
+
+| Prop          | Type      | Default             | Description                                                  |
+| ------------- | --------- | ------------------- | ------------------------------------------------------------ |
+| `width`       | `number`  | `1.5`               | Border thickness in px. 1–2 for cards, 2–3 for buttons.      |
+| `duration`    | `number`  | `6`                 | Seconds for one lap. Slower reads more expensive.            |
+| `spread`      | `number`  | `0.18`              | Arc length of the lit segment, 0–1. Small is a comet; large a halo. |
+| `radius`      | `string`  | `var(--aui-radius)` | Corner radius. Use `9999px` for pills.                       |
+| `onHoverOnly` | `boolean` | `false`             | Run only while hovered or focused within.                    |
+| `className`   | `string`  | —                   | Merged onto the wrapper.                                     |
+
+## Tuning
+
+- **One beam per view.** Two competing laps in the same viewport is noise; this
+  is a spotlight, so point it at the single thing you want clicked.
+- **`onHoverOnly` for grids.** A always-lit beam on every card in a row is
+  visual static — light the one under the cursor instead.
+- **Slow down to look expensive.** 8–12 seconds reads as ambient craft; under 3
+  seconds reads as a loading spinner.
+
+## Accessibility & performance
+
+- Under `prefers-reduced-motion` the beam parks as a static gradient edge — the
+  element keeps its accent, nothing moves.
+- `onHoverOnly` also responds to `:focus-within`, so a keyboard user tabbing into
+  the card gets the same signal a mouse user gets.
+- The ring is decorative and lives in a `::before` behind the content; it never
+  enters the accessibility tree and never intercepts pointer events.
+- Rotation is a single compositor property on one pseudo-element. Styles are
+  scoped per instance via `useId`, so several beams on a page keep independent
+  timing without colliding.
+
+## Theming
+
+```css
+:root {
+  --aui-accent: #dc143c; /* the leading edge of the beam */
+  --aui-accent-2: #ff0040; /* its hot centre */
+  --aui-border: #e7e5e4; /* the unlit ring */
+  --aui-radius: 1rem;
+}
+```

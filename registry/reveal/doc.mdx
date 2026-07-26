@@ -1,0 +1,78 @@
+---
+title: Reveal
+description: Elements lift and sharpen as they scroll into view — the entrance every site rebuilds by hand.
+dependencies:
+  - motion
+---
+
+# Reveal
+
+The plumbing you would otherwise write on every project: content that arrives as
+it enters the viewport, with a short lift and the blur burning off. `Reveal`
+wraps one thing, `RevealGroup` staggers a set without the index arithmetic.
+
+## Install
+
+```bash
+npx shadcn add https://ui.aetherissolutions.com/r/reveal.json
+```
+
+## Usage
+
+```tsx
+import { Reveal, RevealGroup } from "@/components/reveal";
+
+export function Example() {
+  return (
+    <>
+      <Reveal>
+        <h2>Arrivals worth waiting for.</h2>
+      </Reveal>
+
+      <RevealGroup className="grid gap-4 sm:grid-cols-3" stagger={0.08}>
+        {items.map((item) => (
+          <Card key={item.id} {...item} />
+        ))}
+      </RevealGroup>
+    </>
+  );
+}
+```
+
+## Props
+
+| Prop        | Type      | Default | Description                                                     |
+| ----------- | --------- | ------- | --------------------------------------------------------------- |
+| `delay`     | `number`  | `0`     | Seconds to wait after entering view.                            |
+| `distance`  | `number`  | `14`    | Px travelled on the way in. Keep it small — a lift, not a slide. |
+| `blur`      | `number`  | `6`     | Blur burned off as it settles. `0` disables the de-blur.        |
+| `amount`    | `number`  | `0.3`   | Fraction visible before it fires.                               |
+| `repeat`    | `boolean` | `false` | Replay on every re-entry instead of once.                       |
+| `as`        | `string`  | `"div"` | Element to render — `div`, `section`, `article`, `li`, `span`, `p`. |
+| `className` | `string`  | —       | Merged onto the element.                                        |
+
+`RevealGroup` takes all of the above plus `stagger` (default `0.07`), the seconds
+between children.
+
+## Tuning
+
+- **Stagger 0.05–0.09** reads deliberate. Past ~0.15 the last card in a row shows
+  up late enough to feel broken.
+- **`amount` on tall elements** should come down. A full-height section never
+  reaches 30% visible on a short viewport, so it would never fire — use `0.1`.
+- **`repeat` is usually wrong.** Content that re-animates every time you scroll
+  past it draws attention to the animation instead of the content.
+
+## Accessibility & performance
+
+- Under `prefers-reduced-motion` the wrapper renders a plain element with no
+  transition and no motion component — an entrance nobody asked for is the
+  easiest kind of motion to get wrong.
+- `RevealGroup` keeps the container plain and animates only the children, so a
+  grid or flex layout on the group behaves normally.
+- Each reveal is a single one-shot transform and filter, both compositor
+  properties; nothing observes scroll position on the main thread.
+
+## Theming
+
+This module sets no colors — it only moves what you give it.

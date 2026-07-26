@@ -75,6 +75,58 @@ const readTransforms = (sel) =>
   }));
   results.auraCard = { rest: auraRest, hover: auraHover };
 
+
+  // ---- reveal: scroll it into view, expect opacity/filter to settle ----
+  await page.goto(`${BASE}/docs/reveal`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(400);
+  const revealTarget = page.locator("section[aria-label='Reveal demo'] p").first();
+  await revealTarget.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1400);
+  results.reveal = await revealTarget.evaluate((e) => {
+    const s = getComputedStyle(e.parentElement);
+    return { opacity: s.opacity, filter: s.filter, transform: s.transform };
+  });
+
+  // ---- tally-tiles: poll from load, since the count is over in ~1.4s ----
+  // Sampling once is useless here: by the time a single check runs the count has
+  // finished, which looks identical to a count that never ran.
+  await page.goto(`${BASE}/docs/tally-tiles`, { waitUntil: "domcontentloaded" });
+  const tally = await page.evaluate(async () => {
+    const seen = [];
+    const start = performance.now();
+    while (performance.now() - start < 2500) {
+      const el = document.querySelector("dd span");
+      if (el) seen.push(el.textContent);
+      await new Promise((r) => setTimeout(r, 60));
+    }
+    return seen;
+  });
+  results.tallyTiles = {
+    // The first sample is the statically rendered final value (deliberate: a
+    // crawler or a JS-less reader must see the real figure).
+    staticValue: tally[0],
+    intermediateValues: [...new Set(tally.slice(1, -1))].length,
+    landedOn: tally.at(-1),
+  };
+
+  // ---- drift-marquee: the CSS track must actually advance ----
+  await page.goto(`${BASE}/docs/drift-marquee`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(600);
+  const track = page.locator(".aui-drift-track").first();
+  const t1 = await track.evaluate((e) => getComputedStyle(e).transform);
+  await page.waitForTimeout(1200);
+  const t2 = await track.evaluate((e) => getComputedStyle(e).transform);
+  results.driftMarquee = { first: t1, later: t2, advanced: t1 !== t2 };
+
+  // ---- beam-border: the ring must rotate ----
+  await page.goto(`${BASE}/docs/beam-border`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(600);
+  const beam = page.locator("[class^='beam-']").first();
+  const r1 = await beam.evaluate((e) => getComputedStyle(e, "::before").rotate);
+  await page.waitForTimeout(1200);
+  const r2 = await beam.evaluate((e) => getComputedStyle(e, "::before").rotate);
+  results.beamBorder = { first: r1, later: r2, rotating: r1 !== r2 };
+
   console.log(JSON.stringify(results, null, 2));
   await browser.close();
 })().catch((e) => {

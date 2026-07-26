@@ -86,6 +86,60 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "reveal",
+      "type": "registry:component",
+      "title": "Reveal",
+      "description": "Elements lift and sharpen as they scroll into view \u2014 the entrance every site rebuilds by hand.",
+      "files": [
+        {
+          "path": "registry/reveal/reveal.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "tally-tiles",
+      "type": "registry:component",
+      "title": "Tally Tiles",
+      "description": "A row of figures that count up as they scroll into view, with the number carrying all the weight.",
+      "files": [
+        {
+          "path": "registry/tally-tiles/tally-tiles.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "drift-marquee",
+      "type": "registry:component",
+      "title": "Drift Marquee",
+      "description": "Rows of tiles drifting in opposite directions \u2014 the river pattern, with no animation library.",
+      "files": [
+        {
+          "path": "registry/drift-marquee/drift-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "beam-border",
+      "type": "registry:component",
+      "title": "Beam Border",
+      "description": "A lit segment travelling around the border of whatever you wrap \u2014 no library, no JavaScript in the loop.",
+      "files": [
+        {
+          "path": "registry/beam-border/beam-border.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

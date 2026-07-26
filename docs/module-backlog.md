@@ -19,10 +19,8 @@ Reference reels Mike flagged (the taste target):
   Killer demo: before/after transformation for local-business sites
   (pool, kitchen reno, storefront). Frame sources: Blender turntable renders
   or AI-generated interpolation — pipeline note needed.
-- **marquee-velocity** — scroll-velocity-reactive marquee (skew/speed follows
-  scroll speed). Cheap, high-drama, everywhere in the genre.
-- **beam-border** — animated gradient border/beam for CTAs and cards (Motion,
-  tokens-driven).
+- ~~**marquee-velocity**~~ folded into `drift-marquee` as an opt-in `velocity` prop, off by default (velocity coupling reads as gimmick more often than craft).
+- ~~**beam-border**~~ SHIPPED 2026-07-26 — pure CSS, zero deps, `onHoverOnly` for grids.
 - Lab-first: cursor-field page effect (aura-card glow generalized full-page —
   seeded in v1 /lab).
 
@@ -41,23 +39,23 @@ worth a nod from Isaiah. AetherisSite-sourced items are Aetheris-owned = clean.
 
 ### Tier 1 — extract next (premium, low coupling, wide demand)
 
-- **polaroid-parallax** ← dripfc `components/home/hero-polaroids.tsx` (154 ln,
+- ~~**polaroid-parallax**~~ SHIPPED 2026-07-25 ← dripfc `components/home/hero-polaroids.tsx` (154 ln,
   Motion). Scattered photo prints drifting on pointer via spring physics,
   per-item `drift` multipliers, deliberate edge-bleed past the frame. Already
   reduced-motion aware. Work: hardcoded `POLAROIDS` → `items` prop; drip tokens
   → `--aui-*`. **~1–2h.** Portfolios, photographers, events, agencies.
-- **merch-marquee** ← dripfc `components/home/hero-marquee.tsx` (268 ln, Motion).
+- ~~**merch-marquee**~~ SHIPPED 2026-07-26 as `drift-marquee` (authored fresh, zero deps, velocity opt-in) ← dripfc `components/home/hero-marquee.tsx` (268 ln, Motion).
   Dual-row opposing-direction product river; hover reveals a title+price pill;
   edge-fade masks so tiles never hard-crop. Its `HeroMarqueeProduct` type is
   already generic. Work: strip brand rain overlay, declare/lose lucide. Fold in
   the **marquee-velocity** idea above as a `velocity` option → one module.
   **~2–3h.** Highest e-commerce pull of the set.
-- **liquid-stat-tiles** ← dripfc `components/engage/scoreboard-strip.tsx`
+- ~~**liquid-stat-tiles**~~ SHIPPED 2026-07-26 as `tally-tiles` (authored fresh) ← dripfc `components/engage/scoreboard-strip.tsx`
   (330 ln, Motion + `useInView`). Glass stat tiles: count-up on enter, gradient
   numerals, drip tail, "live" pulse, featured plate. Work: four fixed number
   props → `tiles: {label, value, unit?, live?, featured?}[]`. **~2h.** Stat rows
   are among the most-requested marketing sections.
-- **magnetic-elements** ← AetherisSite `components/ui/MagneticElements.tsx`
+- ~~**magnetic-elements**~~ SHIPPED 2026-07-25 ← AetherisSite `components/ui/MagneticElements.tsx`
   (156 ln, GSAP). Wrapper that makes any child button/link lean toward the
   cursor; already throttled + hydration-safe. Work: swap internal `@/lib/gsap`
   and `@/utils/animations` imports for local equivalents. **~1–2h.** Fills a
@@ -72,7 +70,7 @@ worth a nod from Isaiah. AetherisSite-sourced items are Aetheris-owned = clean.
   server action (`voteAction`), the `Poll` repo type, and fingerprint gating;
   extraction = make it presentational with `onVote(id) => Promise<Tally>` +
   `results` prop so the consumer owns persistence. **~1 day.**
-- **reveal** ← dripfc `components/admin/ui/fade-up.tsx` (109 ln + motion
+- ~~**reveal**~~ SHIPPED 2026-07-26 (authored fresh) ← dripfc `components/admin/ui/fade-up.tsx` (109 ln + motion
   tokens). Reduced-motion-aware scroll reveal with stagger. Unflashy, highest
   *utility* on the list — makes the registry read as a system, not three toys.
   **~1h.**
@@ -92,3 +90,19 @@ worth a nod from Isaiah. AetherisSite-sourced items are Aetheris-owned = clean.
 - Device mockups (`IPhoneMockup`, `AppsShowcase`) — commoditized, no edge.
 - Anything carrying client assets or copy verbatim (drip photography, Flite
   product data, brand tokens).
+
+---
+
+## Registry status — 9 modules (2026-07-26)
+
+aura-card · sequence-scroll · lumen-hero · polaroid-parallax · magnetic-elements ·
+reveal · tally-tiles · drift-marquee · beam-border
+
+Four of the nine need **no animation library** (drift-marquee, beam-border) or
+only Motion, which most Next apps already carry. That is worth saying out loud in
+the marketing: the catalog does not force a dependency on anyone.
+
+**Next big rock:** `image-vote-grid` (the dripFC poll — tap a photo to vote,
+optimistic tally, animated results, lightbox). Still the most product-like thing
+on the list and the natural paid-tier headliner; ~1 day, and it needs the
+`onVote(id) => Promise<Tally>` boundary designed before any code.

@@ -8,4 +8,8 @@ export const demos: Record<string, ComponentType> = {
   "lumen-hero": dynamic(() => import("@/registry/lumen-hero/demo")),
   "polaroid-parallax": dynamic(() => import("@/registry/polaroid-parallax/demo")),
   "magnetic-elements": dynamic(() => import("@/registry/magnetic-elements/demo")),
+  "reveal": dynamic(() => import("@/registry/reveal/demo")),
+  "tally-tiles": dynamic(() => import("@/registry/tally-tiles/demo")),
+  "drift-marquee": dynamic(() => import("@/registry/drift-marquee/demo")),
+  "beam-border": dynamic(() => import("@/registry/beam-border/demo")),
 };
